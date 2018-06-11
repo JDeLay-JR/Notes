@@ -107,3 +107,38 @@
             }
         }
     ```
+- We can pass in default values and once a variable is passed in it will override the default value
+    - When a default value is passed the query is called without passing variables
+    - Useful if we want to render some initial data and later have it change on the fly
+    - Example:
+    ```graphQL
+    query HeroNameAndFriends($episode: Episode: "JEDI) {
+        hero(episode: $episode) {
+            name
+            friends{
+                name
+            }
+        }
+    }
+    ```
+
+### Directives
+
+- Kind of like variables but they dynamically change the structure and shape of our queries
+- A directive is either inclusive or exclusive
+- There are only two directives in GraphQL and they are: ```@include(if: BOOL) @skip(if: BOOL)```
+- Directives can be attached to fields and fragments
+- Example: 
+    ```graphql
+    query Hero($episode: Episode, $withFriends: Boolean!)
+        hero(episode: $episode) {
+            name
+            firends @include(if: $withFriends) {
+                name
+            }
+        }
+    }
+    ```
+- Every query the above will give us a hero's name in whatever episode we pass in
+- If the $withFriends variable is true it will also include a list of the hero's friend's names alongside the hero's name
+- Directives essentially allow us to add or remove fields in our queries
