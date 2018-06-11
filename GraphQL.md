@@ -11,11 +11,11 @@
 
 ## Accessing Data
 
-### Queries 
+### Queries
 
 - Example of a query:
 
-    ```
+    ```graphQL
     query getMeAHero {
         hero {
             name
@@ -25,8 +25,8 @@
 - Query fields can also refer to other data objects so instead of hitting multiple REST endpoints we can send one query
     - Great for relational data (think of the Star Wars R2-D2 example ({friends {name }}))
 - Can pass arguments to the field
-    - Example: 
-        ```
+    - Example:
+        ```graphQL
         {
             hero(id: "1") {
                 name
@@ -38,7 +38,7 @@
     - In GraphQL every field and nested object can have arguments
         - We can even pass arguments into scalar fields to do data transformations just once on the server
         - Example (will convert height to feet on the fly):
-            ```
+            ```graphQL
             {
                 hero(id: "1") {
                     name
@@ -47,7 +47,7 @@
             ```
 - We have the ability to alias fields to rename the result of a field to anything we want
     - Example:
-        ```
+        ```graphQL
         {
             luke: hero(episode: EMPIRE) {
                 name
@@ -63,7 +63,7 @@
 
 - Fragments allow us to construct sets of fields (small queries) that can be reused in other (larger) queries
     - Example: 
-    ```
+    ```graphQL
     {
         leftComparison: hero(episode: EMPIRE) {
             ...comparisonFields
@@ -97,7 +97,7 @@
     - Declare $variableName as one of the variables accepted by the query
     - Pass variableName: value in the separate, transport-specific (usually JSON) variables dictionary
 - Example of using a variable:
-    ```
+    ```graphQL
     query HeroNameAndFriends($episode: Episode) {
             hero(episode: $episode) {
                 name
