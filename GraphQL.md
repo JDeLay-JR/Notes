@@ -191,3 +191,34 @@ type Starship {
 - In the above example our field ```length``` takes one argument named ```unit```
     - The ```LengthUnit = METER``` is a default value
     - If a unit argument is not passed it will default to ```METER``` otherwise it will use the argument
+
+### Query and Mutation Types
+
+- Every GraphQL service has a ```query``` type and a ```mutation``` type
+- These types are the *entry point* of every  GraphQL query
+- If we have a query that looks like:
+
+```graphQL
+query {
+    hero {
+        name
+    }
+    droid(id: "2000") {
+        name
+    }
+}
+```
+
+- Then the Query type must look like:
+
+```graphQL
+type Query {
+    hero(episode: Episode) : Character
+    droid(id: ID!): Droid
+}
+```
+
+- This means that when we query for a hero we can pass an episode argument and it will return our Character schema with data accordingly
+    - Same with our droid query
+- Think of the Query as a schematic for how to get data
+    - We want data for heroes by episode so we need to define the our entry point (query type) accordingly
