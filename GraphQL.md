@@ -159,3 +159,35 @@
     ```
 - The ```createReview``` field returns the stars and commentary fields of the newly created review
 - The review variable is an *input object type* which is a special kind of object type that can be passed in as an argument
+
+## Schemas and Types
+
+- The most basic component of a GraphQL schema is what's known as an object type
+- It's simply what the object that you fetch from queries will look like and what fields it has
+- Example:
+
+    ```graphQL
+    type Character {
+        name: String!
+        appearsIn: [Empire]!
+    }
+    ```
+
+- The ```String``` above is a scalar type in GraphQL (built in)
+    - These are types that resolve to a single clear object and can't have sub-sections
+- The ```!``` above represents a *non-nullable field*, we will always get a value when we query this field
+- The ```[]``` represent an array of objects
+- Another example:
+
+```graphql
+type Starship {
+    id: ID!
+    name: String!
+    length(unit: LengthUnit = METER): Float
+}
+```
+
+- All arguments are named and are passed by name specifically
+- In the above example our field ```length``` takes one argument named ```unit```
+    - The ```LengthUnit = METER``` is a default value
+    - If a unit argument is not passed it will default to ```METER``` otherwise it will use the argument
