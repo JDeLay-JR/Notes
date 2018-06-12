@@ -142,3 +142,20 @@
 - Every query the above will give us a hero's name in whatever episode we pass in
 - If the $withFriends variable is true it will also include a list of the hero's friend's names alongside the hero's name
 - Directives essentially allow us to add or remove fields in our queries
+
+### Mutations
+
+- Allow us to (guess what!?) mutate data!
+- Technically any query can mutate data but it's best practice to explicitly use our operation type ```mutation``` to indicate a data write
+- Mutations return an object so we can ask for certain nested fields to fetch the new state of data after an update
+- Example:
+    ```graphQL
+    mutation CreateReviewForEpisode($ep: Episode!, $review: ReviewInput!) {
+        createReview(episode: $ep, review: $review) {
+            stars
+            commentary
+        }
+    }
+    ```
+- The ```createReview``` field returns the stars and commentary fields of the newly created review
+- The review variable is an *input object type* which is a special kind of object type that can be passed in as an argument
